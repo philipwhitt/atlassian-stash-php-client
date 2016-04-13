@@ -1,0 +1,46 @@
+{  
+    "size":2,
+    "limit":1000,
+    "isLastPage":true,
+    "values":[  
+        {  
+            "key":"TEST",
+            "id":1,
+            "name":"Test Project",
+            "description":"Lorem Ipsum",
+            "public":false,
+            "type":"NORMAL",
+            "link":{  
+                "url":"/projects/TEST",
+                "rel":"self"
+            },
+            "links":{  
+                "self":[  
+                    {  
+                        "href":"http://git.example.com/projects/TEST"
+                    }
+                ]
+            }
+        },
+        {  
+            "key":"TEST2",
+            "id":2,
+            "name":"Test Project 2",
+            "description":"Lorem Ipsum 2",
+            "public":false,
+            "type":"NORMAL",
+            "link":{  
+                "url":"/projects/TEST2",
+                "rel":"self"
+            },
+            "links":{  
+                "self":[  
+                    {  
+                        "href":"http://git.example.com/projects/TEST2"
+                    }
+                ]
+            }
+        }
+    ],
+    "start":0
+}

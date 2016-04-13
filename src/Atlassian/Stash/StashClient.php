@@ -22,6 +22,10 @@ class StashClient {
 		$this->httpClient = new Client($params);
 	}
 
+	public function getHttpClient() {
+		return $this->httpClient;
+	}
+
 	public function getProjects() {
 		$encRepos = $this->httpClient->get('/rest/api/1.0/projects?limit=1000')->json();
 

@@ -1,0 +1,25 @@
+{  
+    "lines":[  
+        {  
+            "text":"{"
+        },
+        {  
+            "text":"\t\"name\": \"test/project\","
+        },
+        {  
+            "text":"\t\"require\": {"
+        },
+        {  
+            "text":"\t\t\"nacha/file-generator\"  : \"1.*\""
+        },
+        {  
+            "text":"\t}"
+        },
+        {  
+            "text":"}"
+        }
+    ],
+    "start":0,
+    "size":23,
+    "isLastPage":true
+}
