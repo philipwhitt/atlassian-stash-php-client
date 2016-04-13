@@ -25,7 +25,7 @@ $stash = new StashClient('http://git.example.com', 'user', 'password');
 $projects = $stash->getProjects();
 
 // returns array of Atlassian\Stash\Api\Repo
-$repos = $stash->getRepos('test'); // Project Key Parameter 
+$repos = $stash->getRepos('test'); // By Project Key
 
 // returns contents of file as a string
 $fileContents = $stash->getRepoFileContents($repos[0], '/someFile.txt');
