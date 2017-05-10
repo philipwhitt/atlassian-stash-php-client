@@ -38,7 +38,7 @@ class StashClient {
 		return (new api\RepoApiMapper)->getAllFromEncoded(isset($encRepos['values']) ? $encRepos['values'] : []);
 	}
 
-	public function getRepoFileContents(api\Repo $repo, $file) {
+	public function getRepoFileContents(api\Repo $repo, $file, $seperator="") {
 		$url = sprintf('/rest/api/1.0/projects/%s/repos/%s/browse/%s', $repo->getProjectKey(), $repo->getName(), ltrim($file, '/'));
 
 		$contents = '';
@@ -46,7 +46,7 @@ class StashClient {
 		try {
 			$resp = $this->httpClient->get($url)->json();
 			foreach ($resp['lines'] as $line) {
-				$contents .= $line['text'];
+				$contents .= $line['text'].$seperator;
 			}
 		} catch (ClientException $e) {}
 
