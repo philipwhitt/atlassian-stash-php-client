@@ -34,4 +34,6 @@ $fileContents = $stash->getRepoFileContents($repos[0], '/someFile.txt');
 ```
 
 ### Todo
-Currently the client only does GETs (see above); Lots of missing methods, feel free to put in a pull request.
+Currently the client only does a handful of GETs (see above); Lots of missing methods, feel free to put in a pull request.
+
+Reference docs: https://docs.atlassian.com/DAC/rest/stash/3.11.6/stash-rest.html
