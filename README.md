@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/philipwhitt/atlassian-stash-php-client.svg?branch=master)](https://travis-ci.org/philipwhitt/atlassian-stash-php-client)
-[![Latest Stable Version](https://poser.pugx.org/philipwhitt/atlassian-stash-php-client/v/stable.svg)](https://packagist.org/packages/philipwhitt/atlassian-stash-php-client)
+[![Latest Stable Version](https://poser.pugx.org/atlassian/stash-client/v/stable.svg)](https://packagist.org/packages/atlassian/stash-client)
 
 
 Atlassian Stash PHP Client
