@@ -1,19 +1,21 @@
-[![Build Status](https://drone.io/github.com/philipwhitt/atlassian-stash-php-client/status.png)](https://drone.io/github.com/philipwhitt/atlassian-stash-php-client/latest)
+[![Build Status](https://travis-ci.org/philipwhitt/atlassian-stash-php-client.svg?branch=master)](https://travis-ci.org/philipwhitt/atlassian-stash-php-client)
+[![Latest Stable Version](https://poser.pugx.org/philipwhitt/atlassian-stash-php-client/v/stable.svg)](https://packagist.org/packages/philipwhitt/atlassian-stash-php-client)
+
 
 Atlassian Stash PHP Client
 ============================
 PHP Client for Atlassian Stash (Bitbucket v1)
 
-###Install With Composer
+### Install With Composer
 ```
 {
 	"require" : {
-		"atlassian/stash-client" : "1.*"
+		"atlassian/stash-client" : "1.1.*"
 	}
 }
 ```
 
-###Examples
+### Examples
 ```php
 <?php
 use Atlassian\Stash\StashClient;
@@ -31,5 +33,5 @@ $repos = $stash->getRepos('test'); // By Project Key
 $fileContents = $stash->getRepoFileContents($repos[0], '/someFile.txt');
 ```
 
-###Todo
+### Todo
 Currently the client only does GETs (see above); Lots of missing methods, feel free to put in a pull request.

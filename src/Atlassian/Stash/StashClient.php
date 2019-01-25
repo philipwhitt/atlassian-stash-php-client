@@ -3,6 +3,10 @@
 namespace Atlassian\Stash;
 
 use Atlassian\Stash\Api as api;
+use Atlassian\Stash\Api\TagApiMapper;
+use Atlassian\Stash\Api\RepoApiMapper;
+use Atlassian\Stash\Api\BranchApiMapper;
+use Atlassian\Stash\Api\ProjectApiMapper;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -27,19 +31,55 @@ class StashClient {
 	}
 
 	public function getProjects() {
-		$encRepos = $this->httpClient->get('/rest/api/1.0/projects?limit=1000')->json();
+		$url = '/rest/api/1.0/projects?limit=1000';
 
-		return (new api\ProjectApiMapper)->getAllFromEncoded(isset($encRepos['values']) ? $encRepos['values'] : []);
+		$data = $this->httpClient->get($url)->json();
+
+		return $this->decodeAll(new ProjectApiMapper, $data);
+	}
+
+	public function getBranches(api\Repo $repo) {
+		$url = sprintf(
+			'/rest/api/1.0/projects/%s/repos/%s/branches', 
+			$repo->getProjectKey(), 
+			$repo->getName()
+		);
+
+		$data = $this->httpClient->get($url)->json();
+
+		return $this->decodeAll(new BranchApiMapper, $data);
+	}
+
+	public function getTags(api\Repo $repo) {
+		$url = sprintf(
+			'/rest/api/1.0/projects/%s/repos/%s/tags', 
+			$repo->getProjectKey(), 
+			$repo->getName()
+		);
+
+		$data = $this->httpClient->get($url)->json();
+
+		return $this->decodeAll(new TagApiMapper, $data);
 	}
 
 	public function getRepos($projectKey) {
-		$encRepos = $this->httpClient->get(sprintf('/rest/api/1.0/projects/%s/repos?limit=1000', $projectKey))->json();
+		$url = sprintf(
+			'/rest/api/1.0/projects/%s/repos?limit=1000', 
+			$projectKey
+		);
 
-		return (new api\RepoApiMapper)->getAllFromEncoded(isset($encRepos['values']) ? $encRepos['values'] : []);
+		$data = $this->httpClient->get($url)->json();
+
+		return $this->decodeAll(new RepoApiMapper, $data);
 	}
 
 	public function getRepoFileContents(api\Repo $repo, $file, $seperator="") {
-		$url = sprintf('/rest/api/1.0/projects/%s/repos/%s/browse/%s', $repo->getProjectKey(), $repo->getName(), ltrim($file, '/'));
+		$url = sprintf(
+			'/rest/api/1.0/projects/%s/repos/%s/browse/%s', 
+			$repo->getProjectKey(), 
+			$repo->getName(), 
+			ltrim($file, '/')
+		);
 
 		$contents = '';
 
@@ -51,6 +91,12 @@ class StashClient {
 		} catch (ClientException $e) {}
 
 		return $contents;
+	}
+
+	private function decodeAll($apiMapper, $data) {
+		return $apiMapper->getAllFromEncoded(
+			isset($data['values']) ? $data['values'] : []
+		);
 	}
 
 }

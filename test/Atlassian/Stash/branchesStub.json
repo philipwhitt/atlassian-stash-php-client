@@ -1,0 +1,26 @@
+{
+  "isLastPage": true,
+  "limit": 25,
+  "size": 3,
+  "start": 0,
+  "values": [
+    {
+      "displayId": "master",
+      "id": "refs/heads/master",
+      "isDefault": true,
+      "latestChangeset": "00acc9bb52eb643b8a295576183cdd84cd736417"
+    },
+    {
+      "displayId": "ZULU-303",
+      "id": "refs/heads/bug-fix-1",
+      "isDefault": false,
+      "latestChangeset": "49b0f0ce667241db77fcbc8f31d4b33154ee76da"
+    },
+    {
+      "displayId": "ZULU-251",
+      "id": "refs/heads/bug-fix-2",
+      "isDefault": false,
+      "latestChangeset": "66b8c80dcb3ad12e47a734cb2e2427a236508f5e"
+    }
+  ]
+}

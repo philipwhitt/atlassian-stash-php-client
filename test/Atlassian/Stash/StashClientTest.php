@@ -61,7 +61,7 @@ class StashClientTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetComposer() {
+	public function testGetFile() {
 		// given
 		$body = Stream::factory(file_get_contents(__DIR__.'/fileStub.json'));
 
@@ -80,6 +80,49 @@ class StashClientTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals('test/project', $json['name']);
 		$this->assertEquals('1.*', $json['require']['nacha/file-generator']);
+	}
+
+	public function testGetTags() {
+		// given
+		$expectedTag = (new api\Tag)
+			->setDisplayId("v2.0.694")
+			->setHash(null)
+			->setId("refs/tags/v2.0.694")
+			->setLatestChangeset("323c00fc90b84ccb051a82c260d7a48c66e76dcc");
+
+		$body = Stream::factory(file_get_contents(__DIR__.'/tagsStub.json'));
+
+		$mock = new Mock([new Response(200, [], $body)]);
+		$this->client->getHttpClient()->getEmitter()->attach($mock);
+
+		$repo = (new api\Repo)
+			->setProjectKey('test')
+			->setName('some-project');
+
+		// when
+		$tags = $this->client->getTags($repo);
+
+		// then
+		$this->assertEquals(25, count($tags));
+		$this->assertEquals($tags[0], $expectedTag);
+	}
+
+	public function testGetBranches() {
+		// given
+		$body = Stream::factory(file_get_contents(__DIR__.'/branchesStub.json'));
+
+		$mock = new Mock([new Response(200, [], $body)]);
+		$this->client->getHttpClient()->getEmitter()->attach($mock);
+
+		$repo = (new api\Repo)
+			->setProjectKey('test')
+			->setName('some-project');
+
+		// when
+		$branches = $this->client->getBranches($repo);
+
+		// then
+		$this->assertEquals(3, count($branches));
 	}
 
 }
